@@ -1,9 +1,14 @@
 {
     "type": "library",
-    "name": "ssmith/attribute-collector",
+    "name": "ssmiff/attribute-collector",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Ssmith\\AttributeCollector\\": "src/",
+            "Ssmith\\AttributeCollector\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "Ssmith\\AttributeCollector\\Tests\\": "tests/"
         }
     },
@@ -15,7 +20,6 @@
     ],
     "require": {
         "composer/class-map-generator": "^1.6",
-        "symfony/var-dumper": "^7.3",
         "psr/log": "^3.0"
     },
     "require-dev": {
