@@ -1,0 +1,25 @@
+{
+    "type": "library",
+    "name": "ssmith/attribute-collector",
+    "autoload": {
+        "psr-4": {
+            "Ssmith\\AttributeCollector\\": "src/",
+            "Ssmith\\AttributeCollector\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Scott Smith",
+            "email": "scott@ssmiff.uk"
+        }
+    ],
+    "require": {
+        "composer/class-map-generator": "^1.6",
+        "symfony/var-dumper": "^7.3",
+        "psr/log": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.4",
+        "mockery/mockery": "^1.6"
+    }
+}
