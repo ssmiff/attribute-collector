@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Ssmith\AttributeCollector\AttributeDetails;
@@ -13,14 +14,17 @@ use Ssmith\AttributeCollector\Tests\fixtures\Attributes\TargetMethod;
 use Ssmith\AttributeCollector\Tests\fixtures\Attributes\TargetProperty;
 use Ssmith\AttributeCollector\Tests\fixtures\ReflectionTestClass;
 
-class AttributeReaderTest extends TestCase
+#[CoversClass(AttributeRegistry::class)]
+class AttributeRegistryTest extends TestCase
 {
     #[Test]
     public function can_read_by_attribute(): void
     {
         $registry = $this->createRegistry();
 
-        $attributes = $registry->forAttribute(TargetProperty::class);
+        $attributeIterator = $registry->forAttribute(TargetProperty::class);
+
+        $attributes = iterator_to_array($attributeIterator);
 
         $this->assertCount(2, $attributes);
 
@@ -50,7 +54,9 @@ class AttributeReaderTest extends TestCase
     {
         $registry = $this->createRegistry();
 
-        $attributes = $registry->forClass(ReflectionTestClass::class);
+        $attributeIterator = $registry->forClass(ReflectionTestClass::class);
+
+        $attributes = iterator_to_array($attributeIterator);
 
         $this->assertCount(1, $attributes);
 
@@ -69,7 +75,9 @@ class AttributeReaderTest extends TestCase
     {
         $registry = $this->createRegistry();
 
-        $attributes = $registry->forMethod(ReflectionTestClass::class, 'testMethod');;
+        $attributeIterator = $registry->forMethod(ReflectionTestClass::class, 'testMethod');;
+
+        $attributes = iterator_to_array($attributeIterator);
 
         $this->assertCount(1, $attributes);
 
@@ -89,7 +97,9 @@ class AttributeReaderTest extends TestCase
     {
         $registry = $this->createRegistry();
 
-        $attributes = $registry->forProperty(ReflectionTestClass::class, 'age');;
+        $attributeIterator = $registry->forProperty(ReflectionTestClass::class, 'age');;
+
+        $attributes = iterator_to_array($attributeIterator);
 
         $this->assertCount(1, $attributes);
 

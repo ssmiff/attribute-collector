@@ -3,6 +3,7 @@
 namespace Ssmith\AttributeCollector;
 
 use Countable;
+use Generator;
 use Ssmith\AttributeCollector\Collection\AttributeCollection;
 
 readonly class AttributeRegistry implements Countable
@@ -11,78 +12,68 @@ readonly class AttributeRegistry implements Countable
 
     /**
      * @param class-string $attribute
-     * @return array<AttributeDetails>
+     * @return Generator<AttributeDetails>
      */
-    public function forAttribute(string $attribute): array
+    public function forAttribute(string $attribute): Generator
     {
-        return $this->collection->all()[$attribute] ?? [];
+        foreach ($this->collection->all()[$attribute] ?? [] as $attributeDetails) {
+            yield $attributeDetails;
+        };
     }
 
     /**
      * @param class-string $class
-     * @return array<AttributeDetails>
+     * @return Generator<AttributeDetails>
      */
-    public function forClass(string $class): array
+    public function forClass(string $class): Generator
     {
-        $filteredAttributes = [];
-
         foreach ($this->collection->all() as $attributeSet) {
             foreach ($attributeSet as $attributeDetails) {
                 if ($attributeDetails->kind === AttributeDetails::CLASS_KIND
                     && $attributeDetails->meta['class'] === $class
                 ) {
-                    $filteredAttributes[] = $attributeDetails;
+                    yield $attributeDetails;
                 }
             }
         }
-
-        return $filteredAttributes;
     }
 
     /**
      * @param class-string $class
      * @param string $method
-     * @return array<AttributeDetails>
+     * @return Generator<AttributeDetails>
      */
-    public function forMethod(string $class, string $method): array
+    public function forMethod(string $class, string $method): Generator
     {
-        $filteredAttributes = [];
-
         foreach ($this->collection->all() as $attributeSet) {
             foreach ($attributeSet as $attributeDetails) {
                 if ($attributeDetails->kind === AttributeDetails::METHOD_KIND
                     && $attributeDetails->meta['class'] === $class
                     && $attributeDetails->meta['method'] === $method
                 ) {
-                    $filteredAttributes[] = $attributeDetails;
+                    yield $attributeDetails;
                 }
             }
         }
-
-        return $filteredAttributes;
     }
 
     /**
      * @param class-string $class
      * @param string $property
-     * @return array<AttributeDetails>
+     * @return Generator<AttributeDetails>
      */
-    public function forProperty(string $class, string $property): array
+    public function forProperty(string $class, string $property): Generator
     {
-        $filteredAttributes = [];
-
         foreach ($this->collection->all() as $attributeSet) {
             foreach ($attributeSet as $attributeDetails) {
                 if ($attributeDetails->kind === AttributeDetails::PROPERTY_KIND
                     && $attributeDetails->meta['class'] === $class
                     && $attributeDetails->meta['property'] === $property
                 ) {
-                    $filteredAttributes[] = $attributeDetails;
+                    yield $attributeDetails;
                 }
             }
         }
-
-        return $filteredAttributes;
     }
 
     public function count(): int

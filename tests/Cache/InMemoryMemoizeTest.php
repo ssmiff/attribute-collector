@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cache;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -11,6 +12,7 @@ use Ssmith\AttributeCollector\Cache\InMemoryMemoizer;
 use Ssmith\AttributeCollector\Collection\AttributeCollection;
 use Ssmith\AttributeCollector\Tests\fixtures\ReflectionTestClass;
 
+#[CoversClass(InMemoryMemoizer::class)]
 class InMemoryMemoizeTest extends TestCase
 {
     #[Test]

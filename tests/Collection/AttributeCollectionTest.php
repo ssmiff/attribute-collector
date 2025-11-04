@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Collection;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -14,6 +15,7 @@ use Ssmith\AttributeCollector\Tests\fixtures\Attributes\TargetMethod;
 use Ssmith\AttributeCollector\Tests\fixtures\Attributes\TargetProperty;
 use Ssmith\AttributeCollector\Tests\fixtures\ReflectionTestClass;
 
+#[CoversClass(AttributeCollection::class)]
 class AttributeCollectionTest extends TestCase
 {
     #[Test]
