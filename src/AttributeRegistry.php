@@ -12,7 +12,7 @@ readonly class AttributeRegistry implements Countable
 
     /**
      * @param class-string $attribute
-     * @return Generator<AttributeDetails>
+     * @return Generator<int, AttributeDetails>
      */
     public function forAttribute(string $attribute): Generator
     {
@@ -23,7 +23,7 @@ readonly class AttributeRegistry implements Countable
 
     /**
      * @param class-string $class
-     * @return Generator<AttributeDetails>
+     * @return Generator<int, AttributeDetails>
      */
     public function forClass(string $class): Generator
     {
@@ -41,7 +41,7 @@ readonly class AttributeRegistry implements Countable
     /**
      * @param class-string $class
      * @param string $method
-     * @return Generator<AttributeDetails>
+     * @return Generator<int, AttributeDetails>
      */
     public function forMethod(string $class, string $method): Generator
     {
@@ -60,7 +60,7 @@ readonly class AttributeRegistry implements Countable
     /**
      * @param class-string $class
      * @param string $property
-     * @return Generator<AttributeDetails>
+     * @return Generator<int, AttributeDetails>
      */
     public function forProperty(string $class, string $property): Generator
     {
